@@ -1,0 +1,18 @@
+apply plugin: 'com.github.node-gradle.node'
+
+node {
+    version = '12.18.0'
+    npmVersion = '6.14.4'
+    download = true
+    workDir = file "${project.buildDir}/client"
+    npmWorkDir = file "${project.buildDir}/client"
+    nodeModulesDir = file "${project.projectDir}/client"
+}
+
+task npmRunBuild(type: NpmTask) {
+    dependsOn 'npmInstall'
+    group = 'node'
+    args = ['run', 'build', '--', '--dest', '../src/main/resources/generated']
+}
+
+processResources.dependsOn npmRunBuild

@@ -1,0 +1,36 @@
+debug: true
+server:
+  port: 10000
+spring:
+  profiles:
+    include:
+      - jpa
+      - flyway
+    active:
+      - local
+  redis:
+    url: ${REDIS_URL}
+  datasource:
+    hikari:
+      maximum-pool-size: 10
+  resources:
+    chain:
+      cache: false
+    static-locations:
+      - classpath:/static/
+      - classpath:/generated/
+  session:
+    store-type: redis
+    timeout: 1h
+  cache:
+    type: caffeine
+    caffeine:
+      spec: maximumSize=500, expireAfterAccess=1s
+  devtools:
+    livereload:
+      enabled: true
+    restart:
+      enabled: true
+  output:
+    ansi:
+      enabled: ALWAYS

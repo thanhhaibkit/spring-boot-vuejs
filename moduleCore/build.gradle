@@ -1,0 +1,56 @@
+// Just say hello
+hello.doLast {
+	println "- I am Core module."
+}
+
+buildscript {
+	repositories {
+		maven { url 'https://plugins.gradle.org/m2/' }
+		maven { url 'https://jaspersoft.jfrog.io/jaspersoft/third-party-ce-artifacts/' }
+	}
+	dependencies {
+		classpath 'gradle.plugin.org.flywaydb:gradle-plugin-publishing:6.3.2'
+	}
+}
+
+project.ext {
+	postgresVersion = '42.2.16' // https://mvnrepository.com/artifact/org.postgresql/postgresql
+}
+
+apply plugin: 'java-library'
+apply plugin: 'org.flywaydb.flyway'
+
+// JavaクラスとSQLファイルの出力先ディレクトリを同じにする
+processResources.destinationDir(compileJava.destinationDir)
+// コンパイルより前にSQLファイルを出力先ディレクトリにコピーするために依存関係を逆転する
+compileJava.dependsOn processResources
+
+apply from: 'build.database.gradle'
+
+configurations {
+	testOutput
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+	implementation 'org.springframework.session:spring-session-data-redis'
+	implementation 'org.flywaydb:flyway-core'
+
+	// https://mvnrepository.com/artifact/org.apache.commons/commons-lang3
+	compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.11'
+	// https://mvnrepository.com/artifact/com.sendgrid/sendgrid-java
+	compile group: 'com.sendgrid', name: 'sendgrid-java', version: '4.0.1'
+	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-freemarker
+	compile group: 'org.springframework.boot', name: 'spring-boot-starter-freemarker', version: '2.4.2'
+
+	compileOnly 'org.projectlombok:lombok'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	runtimeOnly 'org.postgresql:postgresql'
+	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.spockframework:spock-spring:1.2-groovy-2.5'
+	testOutput sourceSets.test.output
+}

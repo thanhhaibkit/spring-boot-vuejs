@@ -1,0 +1,11 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: postgres
+    hikari:
+      maximum-pool-size: 3
+  redis:
+    url: redis://localhost:6379
+app:
+  root-url: http://localhost:10000

@@ -1,0 +1,4 @@
+app:
+  sendgrid:
+    personalization-limit: 1000
+    api-retry-limit: 3

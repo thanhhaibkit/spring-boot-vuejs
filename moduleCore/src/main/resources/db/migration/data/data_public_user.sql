@@ -1,0 +1,53 @@
+insert into "public"."user" (
+    account_code,
+    login_id,
+    password,
+    last_name,
+    first_name,
+    last_name_kana,
+    first_name_kana,
+    employee_number,
+    mail_address,
+    sex,
+    sex_type,
+    language,
+    admin,
+    password_first_updated,
+    secret_question,
+    secret_question_answer
+) values (
+    'account001',
+    'test01',
+    '$2a$08$kI8rQBeVkR1flO30Lj2UwuJssiem7quiJVPclECy8meSouH0JcMba',  -- Test1234
+    '管理',
+    'ユーザ',
+    'カンリ',
+    'ユーザ（カナ）',
+    'EMPLOYEE001',
+    'test01@test.co.jp',
+    '男性',
+    'MALE',
+    'JAPANESE',
+    true,
+    true,
+    1,
+    '秘密の質問の回答'
+),
+(
+    'account001',
+    'test02',
+    '$2a$08$kI8rQBeVkR1flO30Lj2UwuJssiem7quiJVPclECy8meSouH0JcMba',  -- Test1234
+    '一般',
+    'ユーザ',
+    'イッパン',
+    'ユーザ（カナ）',
+    'EMPLOYEE002',
+    'test02@test.co.jp',
+    '女性',
+    'FEMALE',
+    'JAPANESE',
+    false,
+    true,
+    1,
+    '秘密の質問の回答'
+)

@@ -1,0 +1,11 @@
+spring:
+  jpa:
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        default_schema: public
+        # Hibernate ddl auto (create, create-drop, validate, update)
+        ddl-auto: update

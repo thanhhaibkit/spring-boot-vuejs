@@ -1,0 +1,4 @@
+// Just say hello
+hello.doLast {
+	println "- I am Batch module."
+}

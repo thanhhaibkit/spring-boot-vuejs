@@ -1,0 +1,21 @@
+spring:
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+  resources:
+    chain:
+      cache: true
+    cache:
+      cachecontrol:
+        max-age: 1h
+        no-store: false
+        no-cache: false
+  session:
+    store-type: REDIS
+    timeout: 1h
+  devtools:
+    livereload:
+      enabled: false
+    restart:
+      enabled: false
